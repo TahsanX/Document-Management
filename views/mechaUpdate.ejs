@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/public/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <%- include('partials/navbar') %> <%- include('partials/herosection') %>
+    <form action="/mecha/<%=obj._id%>/update" method="post">
+      <div class="add-item mb-4">
+        <div><h2>Add Item</h2></div>
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <input
+              required
+              value="<%= obj.company %>"
+              type="text"
+              class="form-control"
+              name="company"
+              placeholder="Tendar Company"
+              aria-label="Tendar Company"
+            />
+          </div>
+          <div class="col-6">
+            <label class="visually-hidden" for="autoSizingSelect"
+              >Preference</label
+            >
+            <select
+              class="form-select"
+              name="item"
+              required
+              id="autoSizingSelect"
+            >
+              <option value="">Choose Item...</option>
+              <option name="item" value="lathe_machine" <% var a = obj.item==="lathe_machine"?"selected":"" %> <%= a %>>
+                Lathe Machine
+              </option>
+              <option name="item" value="heat_exchanger" <% var a = obj.item==="heat_exchanger"?"selected":"" %> <%= a %>>Heat Exchangers</option>
+              <option name="item" value="pressure_gauge" <% var a = obj.item==="pressure_gauge"?"selected":"" %> <%= a %>>Pressure Gauges</option>
+              <option name="item" value="pump" <% var a = obj.item==="pump"?"selected":"" %> <%= a %>>Pumps</option>
+            </select>
+          </div>
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <label class="visually-hidden" for="specificSizeInputName"
+              >Name</label
+            >
+            <input
+              name="quantity"
+              type="text"
+              value="<%= obj.quantity %>"
+              class="form-control"
+              id="specificSizeInputName"
+              placeholder="Quantity"
+              required
+            />
+          </div>
+          <div class="col-6">
+            <label class="visually-hidden" for="specificSizeInputName"
+              >Name</label
+            >
+            <input
+              required
+              type="text"
+              value="<%= obj.price %>"
+              name="price"
+              class="form-control"
+              id="specificSizeInputName"
+              placeholder="Price"
+            />
+          </div>
+        </div>
+        <div class="form-floating">
+          <textarea
+            required
+            name="details"
+            class="form-control"
+            placeholder="Details"
+            id="floatingTextarea"
+          > <%= obj.details %></textarea>
+          <label for="floatingTextarea">Details</label>
+        </div>
+        <div>
+          <button type="Submit" class="btn btn-outline-info mt-3">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <%- include('partials/footer') %> <%- include('partials/scripttag') %>
+  </body>
+</html>

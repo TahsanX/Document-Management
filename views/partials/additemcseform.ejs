@@ -1,0 +1,64 @@
+<form action="/cse" method="post">
+  <div class="add-item mb-4">
+    <div><h2>Add Item</h2></div>
+    <div class="row g-3 mb-4">
+      <div class="col-6">
+        <input
+          required
+          type="text"
+          class="form-control"
+          name="company"
+          placeholder="Tendar Company"
+          aria-label="Tendar Company"
+        />
+      </div>
+      <div class="col-6">
+        <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+        <select class="form-select" name="item" required id="autoSizingSelect">
+          <option value="">Choose Item...</option>
+          <option name="item" value="laptop">High-performance laptops</option>
+          <option name="item" value="keyboard">Keyboards</option>
+          <option name="item" value="logic-gates">Logic Gates</option>
+          <option name="item" value="multiplexers ">Multiplexers</option>
+        </select>
+      </div>
+    </div>
+    <div class="row g-3 mb-4">
+      <div class="col-6">
+        <label class="visually-hidden" for="specificSizeInputName">Name</label>
+        <input
+          name="quantity"
+          type="text"
+          class="form-control"
+          id="specificSizeInputName"
+          placeholder="Quantity"
+          required
+        />
+      </div>
+      <div class="col-6">
+        <label class="visually-hidden" for="specificSizeInputName">Name</label>
+        <input
+          required
+          type="text"
+          name="price"
+          class="form-control"
+          id="specificSizeInputName"
+          placeholder="Price"
+        />
+      </div>
+    </div>
+    <div class="form-floating">
+      <textarea
+        required
+        name="details"
+        class="form-control"
+        placeholder="Details"
+        id="floatingTextarea"
+      ></textarea>
+      <label for="floatingTextarea">Details</label>
+    </div>
+    <div>
+      <button type="Submit" class="btn btn-outline-info mt-3">Submit</button>
+    </div>
+  </div>
+</form>
