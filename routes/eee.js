@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const eeeModel = require("../models/eeeSchema");
-
-router.get("/", async (req, res) => {
+const asyncwrap = require("../controllers/wrapasync");
+const validate = require("../controllers/validationcheck");
+const verifyToken = require("../utils/verifytoken");
+router.get("/", verifyToken, async (req, res) => {
+  const token = req.session.token;
+  const dept = req.user.dept;
   const get = await eeeModel.find();
   const dateall = get.map((obj) => {
     var second = Math.floor((Date.now() - obj.created_at) / 1000);
@@ -32,6 +36,8 @@ router.get("/", async (req, res) => {
     }
   });
   res.render("eeeRoute", {
+    token,
+    dept,
     get,
     osci,
     resis,
@@ -42,31 +48,60 @@ router.get("/", async (req, res) => {
     dateall,
   });
 });
-router.get("/:id/view", async (req, res) => {
-  const { id } = req.params;
-  const obj = await eeeModel.findById(id);
-  res.render("eeeViews", { obj });
-});
-router.get("/:id/update", async (req, res) => {
-  const { id } = req.params;
-  const obj = await eeeModel.findById(id);
-  res.render("eeeUpdate", { obj });
-});
-router.post("/:id/update", async (req, res) => {
-  const { id } = req.params;
-  const obj = req.body;
-  await eeeModel.findByIdAndUpdate(id, obj, { new: true });
-  res.redirect("/eee");
-});
-router.get("/:id/delete", async (req, res) => {
-  const id = req.params.id;
-  await eeeModel.findByIdAndDelete(id);
-  res.redirect("/eee");
-});
-router.post("/", async (req, res) => {
-  const obj = req.body;
-  await eeeModel.insertMany(obj);
-  res.redirect("/eee");
-});
+router.get(
+  "/:id/view",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    const { id } = req.params;
+    const obj = await eeeModel.findById(id);
+    res.render("eeeViews", { obj, token, dept });
+  })
+);
+router.get(
+  "/:id/update",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    const { id } = req.params;
+    const obj = await eeeModel.findById(id);
+    res.render("eeeUpdate", { obj, token, dept });
+  })
+);
+router.post(
+  "/:id/update",
+  verifyToken,
+  validate,
+  asyncwrap(async (req, res) => {
+    const { id } = req.params;
+    const obj = req.body;
+    req.flash("success", `${req.user.username} you have updated an item`);
+    await eeeModel.findByIdAndUpdate(id, obj, { new: true });
+    res.redirect("/eee");
+  })
+);
+router.get(
+  "/:id/delete",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const id = req.params.id;
+    req.flash("success", `${req.user.username} you have deleted an item`);
+    await eeeModel.findByIdAndDelete(id);
+    res.redirect("/eee");
+  })
+);
+router.post(
+  "/",
+  validate,
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const obj = req.body;
+    req.flash("success", `${req.user.username} you have created an item`);
+    await eeeModel.insertMany(obj);
+    res.redirect("/eee");
+  })
+);
 
 module.exports = router;

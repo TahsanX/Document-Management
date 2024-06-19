@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const mechaModel = require("../models/mechaSchema");
-
-router.get("/", async (req, res) => {
+const asyncwrap = require("../controllers/wrapasync");
+const validate = require("../controllers/validationcheck");
+const verifyToken = require("../utils/verifytoken");
+router.get("/", verifyToken, async (req, res) => {
+  const token = req.session.token;
+  const dept = req.user.dept;
   const get = await mechaModel.find();
   const dateall = get.map((obj) => {
     var second = Math.floor((Date.now() - obj.created_at) / 1000);
@@ -32,6 +36,8 @@ router.get("/", async (req, res) => {
     }
   });
   res.render("mechaRoute", {
+    token,
+    dept,
     get,
     lathe_machine,
     heat_exchanger,
@@ -42,31 +48,60 @@ router.get("/", async (req, res) => {
     dateall,
   });
 });
-router.get("/:id/view", async (req, res) => {
-  const { id } = req.params;
-  const obj = await mechaModel.findById(id);
-  res.render("mechaViews", { obj });
-});
-router.get("/:id/update", async (req, res) => {
-  const { id } = req.params;
-  const obj = await mechaModel.findById(id);
-  res.render("mechaUpdate", { obj });
-});
-router.post("/:id/update", async (req, res) => {
-  const { id } = req.params;
-  const obj = req.body;
-  await mechaModel.findByIdAndUpdate(id, obj, { new: true });
-  res.redirect("/mecha");
-});
-router.get("/:id/delete", async (req, res) => {
-  const id = req.params.id;
-  await mechaModel.findByIdAndDelete(id);
-  res.redirect("/mecha");
-});
-router.post("/", async (req, res) => {
-  const obj = req.body;
-  await mechaModel.insertMany(obj);
-  res.redirect("/mecha");
-});
+router.get(
+  "/:id/view",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    const { id } = req.params;
+    const obj = await mechaModel.findById(id);
+    res.render("mechaViews", { obj, token, dept });
+  })
+);
+router.get(
+  "/:id/update",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    const { id } = req.params;
+    const obj = await mechaModel.findById(id);
+    res.render("mechaUpdate", { obj, token, dept });
+  })
+);
+router.post(
+  "/:id/update",
+  validate,
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const { id } = req.params;
+    req.flash("success", `${req.user.username} you have updated an item`);
+    const obj = req.body;
+    await mechaModel.findByIdAndUpdate(id, obj, { new: true });
+    res.redirect("/mecha");
+  })
+);
+router.get(
+  "/:id/delete",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const id = req.params.id;
+    req.flash("success", `${req.user.username} you have deleted an item`);
+    await mechaModel.findByIdAndDelete(id);
+    res.redirect("/mecha");
+  })
+);
+router.post(
+  "/",
+  validate,
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const obj = req.body;
+    req.flash("success", `${req.user.username} you have created an item`);
+    await mechaModel.insertMany(obj);
+    res.redirect("/mecha");
+  })
+);
 
 module.exports = router;
