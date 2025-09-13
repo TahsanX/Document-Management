@@ -49,6 +49,15 @@ router.get("/", verifyToken, async (req, res) => {
   });
 });
 router.get(
+  "/eeeAbout",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    res.render("eeeAbout", { token, dept });
+  })
+);
+router.get(
   "/:id/view",
   verifyToken,
   asyncwrap(async (req, res) => {
@@ -59,6 +68,7 @@ router.get(
     res.render("eeeViews", { obj, token, dept });
   })
 );
+
 router.get(
   "/:id/update",
   verifyToken,

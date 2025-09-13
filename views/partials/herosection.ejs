@@ -1,73 +1,404 @@
-<div class="herosection h-12">
-  <div class="hero-l">
-    <p>Lorem ipsum dolor sit amet.</p>
-    <h3>
-      All in one solution <br />
-      <span class="foruni">for University </span><br /><span class="management"
-        >Document Management</span
-      >
-    </h3>
-    <button
-      type="button"
-      style="box-shadow: 2px 3px #505050"
-      class="btn btn-success"
-    >
-      Success
-    </button>
-  </div>
-  <div>
-    <div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>University Equipment Management System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #0f172a;
+        color: white;
+      }
+
+      .herosection {
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #1e293b 0%,
+          #334155 50%,
+          #0f172a 100%
+        );
+        display: flex;
+        align-items: center;
+        padding: 4rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .herosection::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(59, 130, 246, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(16, 185, 129, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-content .subtitle {
+        font-size: 1.1rem;
+        color: #94a3b8;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #3b82f6, #10b981);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: white;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px 0 rgba(59, 130, 246, 0.5);
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid #475569;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        color: #e2e8f0;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .btn-secondary:hover {
+        border-color: #64748b;
+        background: rgba(71, 85, 105, 0.1);
+        color: white;
+        text-decoration: none;
+      }
+
+      .stats {
+        display: flex;
+        gap: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #334155;
+      }
+
+      .stat {
+        text-align: left;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #10b981;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: #94a3b8;
+        margin-top: 0.25rem;
+      }
+
+      .carousel-container {
+        position: relative;
+      }
+
+      .carousel {
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .carousel-indicators {
+        bottom: -3rem;
+      }
+
+      .carousel-indicators [data-bs-target] {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        background-color: #475569;
+        transition: all 0.2s ease;
+      }
+
+      .carousel-indicators .active {
+        background-color: #3b82f6;
+      }
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        background: rgba(15, 23, 42, 0.8);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .carousel-control-prev {
+        left: -60px;
+      }
+
+      .carousel-control-next {
+        right: -60px;
+      }
+
+      .carousel-control-prev:hover,
+      .carousel-control-next:hover {
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      @media (max-width: 992px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          text-align: center;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          display: none;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .herosection {
+          padding: 2rem 0;
+        }
+
+        .container {
+          padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cta-buttons .btn-primary,
+        .cta-buttons .btn-secondary {
+          width: 100%;
+          text-align: center;
+        }
+
+        .stats {
+          justify-content: space-between;
+          gap: 1rem;
+        }
+
+        .stat {
+          text-align: center;
+          flex: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="herosection">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1>
+              All in one solution<br />
+              for <span class="highlight">University</span><br />
+              <span class="highlight">Equipment Management</span>
+            </h1>
+            <p class="subtitle">
+              Streamline your academic workflow with our comprehensive document
+              management system. Organize, share, and collaborate on university
+              documents with ease.
+            </p>
+            <div class="cta-buttons">
+              <button type="button" class="btn btn-primary">
+                <i class="fas fa-rocket me-2"></i>Get Started
+              </button>
+            </div>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Equipments</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">1,200+</span>
+                <span class="stat-label">Universities</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">Uptime</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-container">
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="/public/caroural1.jpg"
+                    class="d-block w-100"
+                    alt="University Campus"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="/public/carousal2.jpg"
+                    class="d-block w-100"
+                    alt="Library"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="/public/carousal3.jpg"
+                    class="d-block w-100"
+                    alt="Students"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/public/caroural1.jpg" class="d-block w-100" alt="..." />
-        </div>
-        <div class="carousel-item">
-          <img src="/public/carousal2.jpg" class="d-block w-100" alt="..." />
-        </div>
-        <div class="carousel-item">
-          <img src="/public/carousal3.jpg" class="d-block w-100" alt="..." />
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
-</div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

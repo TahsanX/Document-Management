@@ -60,6 +60,15 @@ router.get(
   })
 );
 router.get(
+  "/cseAbout",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    res.render("cseAbout", { token, dept });
+  })
+);
+router.get(
   "/:id/update",
   verifyToken,
   asyncwrap(async (req, res) => {

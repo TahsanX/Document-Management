@@ -49,6 +49,15 @@ router.get("/", verifyToken, async (req, res) => {
   });
 });
 router.get(
+  "/mechaAbout",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    res.render("mechaAbout", { token, dept });
+  })
+);
+router.get(
   "/:id/view",
   verifyToken,
   asyncwrap(async (req, res) => {

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About CSE - Equipment Management System</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="circuit" patternUnits="userSpaceOnUse" width="40" height="40"><path d="M0 20h40M20 0v40" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="1200" height="800" fill="url(%23circuit)"/></svg>');
+        padding: 80px 0;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #64b5f6, #42a5f5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #64b5f6;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        opacity: 0.8;
+        margin-top: 10px;
+      }
+
+      /* Main Content */
+      .main-content {
+        background: white;
+        margin: -50px 0 0;
+        border-radius: 30px 30px 0 0;
+        position: relative;
+        z-index: 2;
+        padding: 80px 0;
+      }
+
+      .section {
+        margin-bottom: 80px;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      .section-content {
+        font-size: 1.1rem;
+        color: #666;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 50px;
+      }
+
+      /* Vision Mission Cards */
+      .vision-mission {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin-top: 50px;
+      }
+
+      .vm-card {
+        background: linear-gradient(135deg, #698fb5 0%, #2c6297 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: left;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid transparent;
+      }
+
+      .vm-card.vision {
+        border-left-color: #667eea;
+      }
+
+      .vm-card.mission {
+        border-left-color: #764ba2;
+      }
+
+      .vm-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .vm-card h3 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .vm-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .vision .vm-icon {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .mission .vm-icon {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+
+      /* Faculty Grid */
+      .faculty-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .faculty-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+      }
+
+      .faculty-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .faculty-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 2rem;
+      }
+
+      .faculty-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .faculty-title {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      .faculty-specialty {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      /* Programs Grid */
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .program-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .program-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+      }
+
+      .program-card:hover::before {
+        transform: rotate(45deg) scale(1.2);
+      }
+
+      .program-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .program-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .program-description {
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .vision-mission {
+          grid-template-columns: 1fr;
+        }
+
+        .vm-card {
+          padding: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Include Navbar Partial -->
+    <%- include('partials/navbar') %><%- include('partials/herosection') %>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Department of Computer Science & Engineering</h1>
+          <p>Rajshahi University of Engineering & Technology</p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number">25+</span>
+              <span class="stat-label">Faculty Members</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">800+</span>
+              <span class="stat-label">Students</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Research Areas</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">30+</span>
+              <span class="stat-label">Years of Excellence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="container">
+        <!-- About Section -->
+        <section class="section fade-in">
+          <h2 class="section-title">About Our Department</h2>
+          <div class="section-content">
+            <p>
+              The Department of Computer Science & Engineering at RUET has been
+              at the forefront of technological education and research since its
+              establishment. We are committed to producing skilled engineers who
+              can meet the challenges of the rapidly evolving technology
+              landscape. Our curriculum combines theoretical foundation with
+              practical application, ensuring our graduates are industry-ready
+              and research-oriented.
+            </p>
+          </div>
+        </section>
+
+        <!-- Vision & Mission -->
+        <section class="section fade-in">
+          <h2 class="section-title">Vision & Mission</h2>
+          <div class="vision-mission">
+            <div class="vm-card vision">
+              <h3>
+                <div class="vm-icon">
+                  <i class="fas fa-eye"></i>
+                </div>
+                Our Vision
+              </h3>
+              <p>
+                To be a leading department in computer science and engineering
+                education, research, and innovation that contributes to the
+                technological advancement of Bangladesh and serves as a center
+                of excellence in the region.
+              </p>
+            </div>
+            <div class="vm-card mission">
+              <h3>
+                <div class="vm-icon">
+                  <i class="fas fa-rocket"></i>
+                </div>
+                Our Mission
+              </h3>
+              <p>
+                To provide quality education in computer science and
+                engineering, conduct cutting-edge research, foster innovation,
+                and develop skilled professionals who can contribute to national
+                development and global technological progress.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Academic Programs -->
+        <section class="section fade-in">
+          <h2 class="section-title">Academic Programs</h2>
+          <div class="programs-grid">
+            <div class="program-card">
+              <i class="fas fa-graduation-cap program-icon"></i>
+              <h3 class="program-title">Bachelor of Science</h3>
+              <p class="program-description">
+                4-year undergraduate program in Computer Science & Engineering
+                with comprehensive curriculum covering all major areas of
+                computing.
+              </p>
+            </div>
+            <div class="program-card">
+              <i class="fas fa-microscope program-icon"></i>
+              <h3 class="program-title">Master of Science</h3>
+              <p class="program-description">
+                Advanced graduate program focusing on research and specialized
+                areas in computer science and engineering.
+              </p>
+            </div>
+            <div class="program-card">
+              <i class="fas fa-brain program-icon"></i>
+              <h3 class="program-title">PhD Program</h3>
+              <p class="program-description">
+                Doctoral research program for advancing knowledge in various
+                domains of computer science and engineering.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research Areas -->
+        <section class="section fade-in">
+          <h2 class="section-title">Research Excellence</h2>
+          <div class="section-content">
+            <p>
+              Our faculty and students engage in cutting-edge research across
+              multiple domains including Artificial Intelligence, Machine
+              Learning, Data Science, Cybersecurity, Software Engineering,
+              Computer Networks, Database Systems, Human-Computer Interaction,
+              and Bioinformatics. We maintain active collaborations with
+              industry and international institutions.
+            </p>
+          </div>
+        </section>
+
+        <!-- Key Faculty -->
+        <section class="section fade-in">
+          <h2 class="section-title">Distinguished Faculty</h2>
+          <div class="faculty-grid">
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h3 class="faculty-name">Prof. Dr. Ahmed Rahman</h3>
+              <p class="faculty-title">Head of Department</p>
+              <p class="faculty-specialty">
+                Artificial Intelligence & Machine Learning
+              </p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <h3 class="faculty-name">Prof. Dr. Fatima Khan</h3>
+              <p class="faculty-title">Professor</p>
+              <p class="faculty-specialty">Cybersecurity & Network Systems</p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-cog"></i>
+              </div>
+              <h3 class="faculty-name">Dr. Mohammad Ali</h3>
+              <p class="faculty-title">Associate Professor</p>
+              <p class="faculty-specialty">Software Engineering & HCI</p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-astronaut"></i>
+              </div>
+              <h3 class="faculty-name">Dr. Rashida Begum</h3>
+              <p class="faculty-title">Assistant Professor</p>
+              <p class="faculty-specialty">Data Science & Bioinformatics</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Include Footer Partial -->
+    <%- include('partials/footer') %>
+
+    <script>
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = "0s";
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Counter animation for stats
+      const animateCounters = () => {
+        const counters = document.querySelectorAll(".stat-number");
+        counters.forEach((counter) => {
+          const target = parseInt(counter.textContent.replace("+", ""));
+          const increment = target / 100;
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              counter.textContent = target + "+";
+              clearInterval(timer);
+            } else {
+              counter.textContent = Math.ceil(current) + "+";
+            }
+          }, 20);
+        });
+      };
+
+      // Trigger counter animation when hero section is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(animateCounters, 1000);
+            heroObserver.disconnect();
+          }
+        });
+      });
+
+      heroObserver.observe(document.querySelector(".hero-section"));
+    </script>
+  </body>
+</html>

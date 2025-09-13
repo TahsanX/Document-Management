@@ -74,6 +74,15 @@ router.get(
     res.render("civilUpdate", { obj, token, dept });
   })
 );
+router.get(
+  "/civilAbout",
+  verifyToken,
+  asyncwrap(async (req, res) => {
+    const token = req.session.token;
+    const dept = req.user.dept;
+    res.render("civilAbout", { token, dept });
+  })
+);
 router.post(
   "/:id/update",
   validate,

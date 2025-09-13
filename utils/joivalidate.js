@@ -2,7 +2,6 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   company: Joi.string().trim().min(3).max(30).required(),
-
   item: Joi.string()
     .valid(
       "Sieve",

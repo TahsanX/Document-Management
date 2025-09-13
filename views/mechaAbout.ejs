@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About ME - Equipment Management System</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="mechanical" patternUnits="userSpaceOnUse" width="60" height="60"><circle cx="30" cy="30" r="15" fill="none" stroke="%23ffffff" stroke-width="1" opacity="0.1"/><circle cx="30" cy="30" r="3" fill="%23ffffff" opacity="0.1"/><path d="M15 30h10M35 30h10" stroke="%23ffffff" stroke-width="2" opacity="0.1"/><path d="M30 15v10M30 35v10" stroke="%23ffffff" stroke-width="2" opacity="0.1"/><path d="M20 20l5 5M35 35l5 5M40 20l-5 5M25 35l-5 5" stroke="%23ffffff" stroke-width="1" opacity="0.1"/></pattern></defs><rect width="1200" height="800" fill="url(%23mechanical)"/></svg>');
+        padding: 80px 0;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #667eea;
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        opacity: 0.8;
+        margin-top: 10px;
+      }
+
+      /* Main Content */
+      .main-content {
+        background: white;
+        margin: -50px 0 0;
+        border-radius: 30px 30px 0 0;
+        position: relative;
+        z-index: 2;
+        padding: 80px 0;
+      }
+
+      .section {
+        margin-bottom: 80px;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      .section-content {
+        font-size: 1.1rem;
+        color: #666;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 50px;
+      }
+
+      /* Vision Mission Cards */
+      .vision-mission {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin-top: 50px;
+      }
+
+      .vm-card {
+        background: linear-gradient(135deg, #ca4cf5 0%, #b61cea 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: left;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid transparent;
+      }
+
+      .vm-card.vision {
+        border-left-color: #667eea;
+      }
+
+      .vm-card.mission {
+        border-left-color: #764ba2;
+      }
+
+      .vm-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .vm-card h3 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .vm-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .vision .vm-icon {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .mission .vm-icon {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+
+      /* Faculty Grid */
+      .faculty-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .faculty-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+      }
+
+      .faculty-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .faculty-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 2rem;
+      }
+
+      .faculty-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .faculty-title {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      .faculty-specialty {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      /* Programs Grid */
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .program-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .program-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+      }
+
+      .program-card:hover::before {
+        transform: rotate(45deg) scale(1.2);
+      }
+
+      .program-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .program-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .program-description {
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Specializations Grid */
+      .specializations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 50px;
+      }
+
+      .specialization-card {
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .specialization-card:hover {
+        transform: translateY(-3px);
+        border-color: #667eea;
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+      }
+
+      .spec-icon {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 15px;
+      }
+
+      .spec-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .spec-description {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .vision-mission {
+          grid-template-columns: 1fr;
+        }
+
+        .vm-card {
+          padding: 30px;
+        }
+
+        .specializations-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Include Navbar Partial -->
+    <%- include('partials/navbar') %><%- include('partials/herosection') %>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Department of Mechanical Engineering</h1>
+          <p>Rajshahi University of Engineering & Technology</p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number">25+</span>
+              <span class="stat-label">Faculty Members</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">800+</span>
+              <span class="stat-label">Students</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Research Labs</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Years of Excellence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="container">
+        <!-- About Section -->
+        <section class="section fade-in">
+          <h2 class="section-title">About Our Department</h2>
+          <div class="section-content">
+            <p>
+              The Department of Mechanical Engineering at RUET stands as one of
+              the premier departments in engineering education in Bangladesh.
+              Since its establishment, we have been dedicated to advancing
+              knowledge in mechanical systems, manufacturing processes,
+              thermodynamics, and emerging technologies. Our comprehensive
+              curriculum integrates fundamental principles with cutting-edge
+              applications, preparing graduates for leadership roles in
+              industry, research, and innovation.
+            </p>
+          </div>
+        </section>
+
+        <!-- Vision & Mission -->
+        <section class="section fade-in">
+          <h2 class="section-title">Vision & Mission</h2>
+          <div class="vision-mission">
+            <div class="vm-card vision">
+              <h3>
+                <div class="vm-icon">
+                  <i class="fas fa-cogs"></i>
+                </div>
+                Our Vision
+              </h3>
+              <p>
+                To be a globally recognized center of excellence in mechanical
+                engineering education and research, contributing to sustainable
+                development through innovative solutions in manufacturing,
+                energy systems, robotics, and advanced materials technology.
+              </p>
+            </div>
+            <div class="vm-card mission">
+              <h3>
+                <div class="vm-icon">
+                  <i class="fas fa-tools"></i>
+                </div>
+                Our Mission
+              </h3>
+              <p>
+                To provide world-class education in mechanical engineering,
+                conduct impactful research addressing societal needs, and
+                develop skilled engineers who can lead technological advancement
+                in manufacturing, automotive, aerospace, energy, and automation
+                sectors.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Academic Programs -->
+        <section class="section fade-in">
+          <h2 class="section-title">Academic Programs</h2>
+          <div class="programs-grid">
+            <div class="program-card">
+              <i class="fas fa-graduation-cap program-icon"></i>
+              <h3 class="program-title">Bachelor of Science</h3>
+              <p class="program-description">
+                4-year undergraduate program in Mechanical Engineering covering
+                thermodynamics, fluid mechanics, manufacturing, design, and
+                materials science.
+              </p>
+            </div>
+            <div class="program-card">
+              <i class="fas fa-microscope program-icon"></i>
+              <h3 class="program-title">Master of Science</h3>
+              <p class="program-description">
+                Advanced graduate program with specializations in Manufacturing,
+                Thermal Engineering, Design, and Industrial Automation
+                technologies.
+              </p>
+            </div>
+            <div class="program-card">
+              <i class="fas fa-atom program-icon"></i>
+              <h3 class="program-title">PhD Program</h3>
+              <p class="program-description">
+                Doctoral research program advancing knowledge in mechanical
+                engineering, manufacturing systems, energy technologies, and
+                advanced materials.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Specializations -->
+        <section class="section fade-in">
+          <h2 class="section-title">Areas of Specialization</h2>
+          <div class="specializations-grid">
+            <div class="specialization-card">
+              <i class="fas fa-fire spec-icon"></i>
+              <h3 class="spec-title">Thermal Engineering</h3>
+              <p class="spec-description">
+                Heat transfer, thermodynamics, HVAC, and energy systems
+              </p>
+            </div>
+            <div class="specialization-card">
+              <i class="fas fa-industry spec-icon"></i>
+              <h3 class="spec-title">Manufacturing</h3>
+              <p class="spec-description">
+                Production processes, CNC machining, and quality control
+              </p>
+            </div>
+            <div class="specialization-card">
+              <i class="fas fa-tint spec-icon"></i>
+              <h3 class="spec-title">Fluid Mechanics</h3>
+              <p class="spec-description">
+                Fluid flow, hydraulics, pneumatics, and turbomachinery
+              </p>
+            </div>
+            <div class="specialization-card">
+              <i class="fas fa-cube spec-icon"></i>
+              <h3 class="spec-title">Materials Science</h3>
+              <p class="spec-description">
+                Material properties, testing, composites, and metallurgy
+              </p>
+            </div>
+            <div class="specialization-card">
+              <i class="fas fa-robot spec-icon"></i>
+              <h3 class="spec-title">Robotics & Automation</h3>
+              <p class="spec-description">
+                Industrial automation, mechatronics, and robotic systems
+              </p>
+            </div>
+            <div class="specialization-card">
+              <i class="fas fa-drafting-compass spec-icon"></i>
+              <h3 class="spec-title">Design Engineering</h3>
+              <p class="spec-description">
+                CAD/CAM, product design, and mechanical system analysis
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research Areas -->
+        <section class="section fade-in">
+          <h2 class="section-title">Research Excellence</h2>
+          <div class="section-content">
+            <p>
+              Our research spans across advanced manufacturing technologies,
+              renewable energy systems, computational fluid dynamics, materials
+              characterization, robotics and automation, sustainable
+              engineering, biomechanics, and industrial process optimization. We
+              collaborate with leading universities, research institutions, and
+              industry partners to address real-world engineering challenges and
+              contribute to technological innovation.
+            </p>
+          </div>
+        </section>
+
+        <!-- Key Faculty -->
+        <section class="section fade-in">
+          <h2 class="section-title">Distinguished Faculty</h2>
+          <div class="faculty-grid">
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h3 class="faculty-name">Prof. Dr. Mohammad Ali</h3>
+              <p class="faculty-title">Head of Department</p>
+              <p class="faculty-specialty">
+                Manufacturing & Industrial Engineering
+              </p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <h3 class="faculty-name">Prof. Dr. Rashida Begum</h3>
+              <p class="faculty-title">Professor</p>
+              <p class="faculty-specialty">Thermal & Energy Systems</p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-cog"></i>
+              </div>
+              <h3 class="faculty-name">Dr. Abdul Rahman</h3>
+              <p class="faculty-title">Associate Professor</p>
+              <p class="faculty-specialty">Fluid Mechanics & CFD</p>
+            </div>
+            <div class="faculty-card">
+              <div class="faculty-avatar">
+                <i class="fas fa-user-astronaut"></i>
+              </div>
+              <h3 class="faculty-name">Dr. Fatema Khatun</h3>
+              <p class="faculty-title">Assistant Professor</p>
+              <p class="faculty-specialty">Materials & Design Engineering</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Include Footer Partial -->
+    <%- include('partials/footer') %>
+
+    <script>
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = "0s";
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Counter animation for stats
+      const animateCounters = () => {
+        const counters = document.querySelectorAll(".stat-number");
+        counters.forEach((counter) => {
+          const target = parseInt(counter.textContent.replace("+", ""));
+          const increment = target / 100;
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              counter.textContent = target + "+";
+              clearInterval(timer);
+            } else {
+              counter.textContent = Math.ceil(current) + "+";
+            }
+          }, 20);
+        });
+      };
+
+      // Trigger counter animation when hero section is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(animateCounters, 1000);
+            heroObserver.disconnect();
+          }
+        });
+      });
+
+      heroObserver.observe(document.querySelector(".hero-section"));
+    </script>
+  </body>
+</html>
